@@ -6,6 +6,7 @@ import 'package:langchain/langchain.dart';
 import 'package:langchain_openai/langchain_openai.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomeController extends GetxController {
   RxString text = ''.obs;
@@ -43,6 +44,7 @@ class HomeController extends GetxController {
   }
 
   chains() async {
+    var openAiKey = dotenv.env['OPENAIAPIKEY'];
     final loader = TextLoader(srcPath);
     final documents = await loader.load();
     const textSplitter = CharacterTextSplitter(
